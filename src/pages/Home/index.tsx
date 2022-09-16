@@ -4,8 +4,6 @@ import superLudo from '../../assets/images/Super Ludo.svg';
 
 import entrar from '../../assets/images/Entrar.svg';
 
-import bgImage from '../../assets/images/bg-image.jpg';
-
 import volumeMedium from '../../assets/images/volume-medium.svg';
 
 export const Home = () => {
