@@ -5,7 +5,6 @@ const moveImage = () => {
   const [isVisible, setIsVisible] = useState(false);
   const transition = useTransition(isVisible, {
     from: { x: -200, y: 0, opacity: 0 },
-    enter: { x: 0, y: 0, opacity: 1 },
     leave: { x: 200, y: 0, opacity: 1 },
   });
 

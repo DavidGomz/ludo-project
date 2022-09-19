@@ -299,7 +299,6 @@ export const Game = () => {
 
   function handleCasePiece(initial: number, piece: PiecesTypes) {
     const newCaseArray = squareChildren;
-    console.log(initial, piece);
 
     if (cont === 51) {
       newCaseArray[0].pieces.push(
