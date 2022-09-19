@@ -1,4 +1,4 @@
-import Mario from '../../../assets/images/Mario.svg';
+import Wario from '../../../assets/images/Wario.png';
 import { useState } from 'react';
 import { useTransition, animated } from 'react-spring';
 const moveImage = () => {
@@ -18,14 +18,14 @@ const moveImage = () => {
           setIsVisible((v) => !v);
         }}
       >
-        move Mario
+        move Wario
       </button>
       {transition((style, item) =>
         item ? (
           <animated.img
             style={style}
             className="w-[47px] h-[47px]"
-            src={Mario}
+            src={Wario}
           />
         ) : (
           ''
