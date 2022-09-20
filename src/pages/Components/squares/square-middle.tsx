@@ -1,13 +1,18 @@
 interface Props {
   id?: number;
   color: string;
-  playerId?: number;
+  playerId?: string;
   pieces?: PiecesTypes[];
 }
 
 interface PiecesTypes {
-  playerId: number;
+  playerId?: string;
   src: string;
+}
+
+interface DataTypes {
+  width: number;
+  height: number;
 }
 
 const squareMiddle = ({ color, pieces, playerId, id }: Props) => {

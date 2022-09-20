@@ -1,15 +1,15 @@
-import React, { Component, MouseEventHandler, useRef, useState } from 'react';
+import React, { Component, useRef, useState } from 'react';
 import { animated, useTransition } from 'react-spring';
 
 interface Props {
   id?: number;
   color: string;
-  playerId?: number;
+  playerId?: string;
   pieces?: PiecesTypes[];
 }
 
 interface PiecesTypes {
-  playerId: number;
+  playerId?: string;
   src: string;
 }
 
@@ -25,6 +25,11 @@ const square = ({ color, pieces, playerId, id }: Props) => {
   const transition = useTransition(isVisible, {
     from: { x: 0, y: 0, opacity: 1 },
     enter: { x: data ? data.width : 0, y: 0, opacity: 1 },
+    config: { duration: 500 },
+    onRest: () => {
+      if (!isVisible) return;
+      setIsVisible(!isVisible);
+    },
   });
 
   function getData() {
