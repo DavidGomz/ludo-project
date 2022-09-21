@@ -18,7 +18,7 @@ interface DataTypes {
   height: number;
 }
 
-const square = ({ color, pieces, playerId, id }: Props) => {
+const square = ({ color, pieces, playerId, id, clicked }: Props) => {
   const divElement = useRef<HTMLImageElement>(null);
   const [data, setData] = useState<DataTypes>();
   const [isVisible, setIsVisible] = useState(false);
@@ -67,9 +67,10 @@ const square = ({ color, pieces, playerId, id }: Props) => {
                       piece.playerId !== playerId && array.length > 1 ? 0.7 : 1,
                   }}
                   onClick={() => {
-                    if (piece.playerId !== playerId) {
+                    /*     if (piece.playerId !== playerId) {
                       return;
-                    }
+                    } */
+                    clicked(index);
                     setIsVisible(!isVisible);
                   }}
                 />

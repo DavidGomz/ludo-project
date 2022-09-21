@@ -72,7 +72,9 @@ export const Game = () => {
     {
       color: null,
       id: 7,
-      pieces: [],
+      pieces: [
+        { id: 1, playerId: playerID, position: 0, src: Mario, finish: false },
+      ],
     },
     {
       color: null,
@@ -92,7 +94,9 @@ export const Game = () => {
     {
       color: null,
       id: 11,
-      pieces: [],
+      pieces: [
+        { id: 1, playerId: playerID, position: 0, src: Mario, finish: false },
+      ],
     },
     {
       color: null,
@@ -387,6 +391,13 @@ export const Game = () => {
                 color="#D9D9D9"
                 playerId={playerID}
                 pieces={squareChildren[6].pieces}
+                clicked={(pieceIndex) => {
+                  const piece = squareChildren[6].pieces[pieceIndex];
+                  const novoVetor = squareChildren.slice();
+                  novoVetor[6].pieces.splice(pieceIndex, 1);
+                  novoVetor[47].pieces.push(piece);
+                  setSquareChildren(novoVetor);
+                }}
               />
               <Square
                 id={48}
