@@ -20,7 +20,7 @@ export const Home = () => {
         <div className="flex flex-col justify-center  items-center">
           <input
             type="text"
-            placeholder="Digite seu nome"
+            placeholder="Digite um nome"
             className="mt-20 w-full p-4 rounded-xl h-12 bg-[#404156] text-center text-white"
             onBlur={(e) => {
               setName(e.target.value);

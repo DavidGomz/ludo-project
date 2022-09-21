@@ -1,16 +1,22 @@
-import React, { Component, useRef, useState } from 'react';
-import { animated, useTransition } from 'react-spring';
+import { useApi } from '../../../services/api';
+
+import Mario from '../../../assets/images/Mario.svg';
+import Wario from '../../../assets/images/wario.svg';
+import Luigi from '../../../assets/images/Luigi.svg';
+import Waluigi from '../../../assets/images/waluigi.svg';
 
 interface Props {
   id?: number;
   color: string;
-  playerId?: string;
-  pieces?: PiecesTypes[];
 }
 
 interface PiecesTypes {
-  playerId?: string;
+  id: number;
+  playerID: string;
+  position: number | null;
   src: string;
+  final: boolean;
+  canEntryFinal: boolean;
 }
 
 interface DataTypes {
@@ -18,75 +24,60 @@ interface DataTypes {
   height: number;
 }
 
-const square = ({ color, pieces, playerId, id, clicked }: Props) => {
-  const divElement = useRef<HTMLImageElement>(null);
-  const [data, setData] = useState<DataTypes>();
-  const [isVisible, setIsVisible] = useState(false);
-  const transition = useTransition(isVisible, {
-    from: { x: 0, y: 0, opacity: 1 },
-    enter: { x: data ? data.width : 0, y: 0, opacity: 1 },
-    config: { duration: 500 },
-    onRest: () => {
-      if (!isVisible) return;
-      setIsVisible(!isVisible);
-    },
-  });
+const square = ({ color, id }: Props) => {
+  const { room, playerID, sumPiecePosition, passTurn } = useApi();
 
-  function getData() {
-    if (divElement.current) {
-      setData({
-        width: divElement.current.offsetWidth,
-        height: divElement.current.offsetHeight,
+  function getImage(index: string) {
+    if (index === room?.players[0].id) return Mario;
+    if (index === room?.players[1].id) return Waluigi;
+    if (index === room?.players[2].id) return Wario;
+    return Luigi;
+  }
+
+  function getPiece() {
+    if (!room) return null;
+    const arrayPieces: PiecesTypes[] = [];
+    room.players.forEach((player) => {
+      player.pieces.forEach((piece) => {
+        if (piece.position === id) arrayPieces.push(piece);
       });
-      console.log(data);
-    }
+    });
+    return arrayPieces;
   }
 
   return (
     <div
-      className={`w-[33.33%] h-[16.667%] flex justify-end items-start float-left border-solid border-[#202020] border bg-[${color}] `}
+      className={`w-[33.33%] h-[16.667%] float-left border-[#202020] border bg-[${color}]`}
     >
-      <div
-        className="relative w-full h-full flex"
-        ref={divElement}
-        onLoad={() => getData()}
-      >
-        {pieces?.length !== 0
-          ? pieces?.map((piece, index, array) => (
-              <div>
+      <div className="relative w-full h-full flex">
+        {room
+          ? getPiece()?.map((piece, index, array) => {
+              return (
                 <img
                   key={index}
-                  src={piece.src}
+                  src={getImage(piece.playerID)}
                   className={`h-full absolute`}
                   style={{
                     left: `${index * 0.3}rem`,
-                    zIndex: piece.playerId === playerId ? 2 : 0,
-                    pointerEvents:
-                      piece.playerId !== playerId ? 'none' : 'auto',
+                    zIndex: piece.playerID === playerID ? 2 : 0,
                     opacity:
-                      piece.playerId !== playerId && array.length > 1 ? 0.7 : 1,
+                      piece.playerID !== playerID && array.length > 1 ? 0.7 : 1,
                   }}
                   onClick={() => {
-                    /*     if (piece.playerId !== playerId) {
+                    if (
+                      piece.playerID !== playerID ||
+                      room.turnsPlayer.id !== playerID ||
+                      !room.diced ||
+                      !sumPiecePosition ||
+                      !passTurn
+                    )
                       return;
-                    } */
-                    clicked(index);
-                    setIsVisible(!isVisible);
+                    sumPiecePosition(piece);
+                    passTurn();
                   }}
                 />
-                {transition((style, item) =>
-                  item && piece.playerId === playerId ? (
-                    <animated.img
-                      style={style}
-                      className="h-full"
-                      src={piece.src}
-                    />
-                  ) : (
-                    ''
-                  ),
-                )}
-              </div>
-            ))
+              );
+            })
           : null}
       </div>
     </div>
