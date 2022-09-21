@@ -1,5 +1,5 @@
 import Mario from '../../assets/images/Mario.svg';
-import Wario from '../../assets/images/Wario.png';
+import Wario from '../../assets/images/wario.svg';
 import Luigi from '../../assets/images/Luigi.svg';
 import Waluigi from '../../assets/images/waluigi.svg';
 
@@ -52,7 +52,9 @@ export const Cases = ({ player, playerIndex }: PropTypes) => {
               key={index}
               className="w-[35%] h-[35%] m-[7.5%] float-left bg-[#D9D9D9] rounded-full justify-center items-center flex"
             >
-              <img src={getImage()} />
+              {!piece.position ? (
+                <img src={getImage()} className="h-4/5" />
+              ) : null}
             </div>
           ))
         : createCases()}

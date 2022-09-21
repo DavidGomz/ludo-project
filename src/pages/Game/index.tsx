@@ -1,6 +1,6 @@
 // Pagina para elaboração do jogo
 import Mario from '../../assets/images/Mario.svg';
-import Wario from '../../assets/images/Wario.png';
+import Wario from '../../assets/images/wario.svg';
 import Luigi from '../../assets/images/Luigi.svg';
 import Waluigi from '../../assets/images/waluigi.svg';
 import Square from '../Components/squares/square';
