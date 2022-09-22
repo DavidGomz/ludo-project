@@ -50,6 +50,7 @@ const squareMiddle = ({ color, id }: Props) => {
       className={`w-[16.667%] h-[33.33%] float-left border-[#202020] border bg-[${color}]`}
     >
       <div className="relative w-full h-full flex">
+        <>{id}</>
         {room
           ? getPieces()?.map((piece, index, array) => {
               return (

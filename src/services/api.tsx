@@ -103,6 +103,10 @@ export const ApiContext = ({ children }: PropTypes) => {
         console.log('connecteeeedd');
       };
 
+      ws.onclose = () => {
+        console.log(`${player?.name} Closssssssssssssed`);
+      };
+
       ws.onmessage = (event: MessageEvent<any>) => {
         let msg = JSON.parse(event.data);
 
@@ -323,7 +327,7 @@ export const ApiContext = ({ children }: PropTypes) => {
       (piece) =>
         piece.position === pieceInMoving.position &&
         piece.playerID !== pieceInMoving.playerID &&
-        !isPieceInProtectedCell([1, 8, 13, 20, 25, 32, 37], pieceInMoving),
+        !isPieceInProtectedCell([1, 9, 14, 22, 27, 35, 40, 48], pieceInMoving),
     )
       ? true
       : false;
@@ -334,7 +338,7 @@ export const ApiContext = ({ children }: PropTypes) => {
       (piece) =>
         piece.position === pieceInMoving.position &&
         piece.playerID !== pieceInMoving.playerID &&
-        !isPieceInProtectedCell([4, 12, 17, 25, 30, 38, 43, 51], pieceInMoving),
+        !isPieceInProtectedCell([1, 8, 13, 20, 25, 32, 37], pieceInMoving),
     );
   }
 
@@ -413,28 +417,24 @@ export const ApiContext = ({ children }: PropTypes) => {
   function sumPiecePosition(piece: PiecesTypes) {
     if (!room || !room.dice) return;
     if (!hasPiecesOnBoard(room.turnsPlayer)) {
-      console.log(piece, 'Entrei sumPosition if');
       if (room.turnsPlayer === room.players[0]) {
-        piece.position = piece.position + 4 + room.dice;
+        piece.position = piece.position - 5 + room.dice;
       } else if (room.turnsPlayer === room.players[1]) {
-        piece.position = piece.position + 17 + room.dice;
+        piece.position = piece.position + 8 + room.dice;
       } else if (room.turnsPlayer === room.players[2]) {
-        piece.position = piece.position + 30 + room.dice;
+        piece.position = piece.position + 21 + room.dice;
       } else if (room.turnsPlayer === room.players[3]) {
-        piece.position = piece.position + 43 + room.dice;
+        piece.position = piece.position + 34 + room.dice;
       }
     } else if (piece.position === null) {
-      console.log(piece, 'Entrei sumPosition null');
-
       if (room.turnsPlayer === room.players[0]) {
-        // console.log('player0', piece.position + 5 + room.dice);
-        piece.position = piece.position + 5 + room.dice;
+        piece.position = piece.position - 5 + room.dice;
       } else if (room.turnsPlayer === room.players[1]) {
-        piece.position = piece.position + 7 + room.dice;
+        piece.position = piece.position + 8 + room.dice;
       } else if (room.turnsPlayer === room.players[2]) {
-        piece.position = piece.position + 19 + room.dice;
+        piece.position = piece.position + 21 + room.dice;
       } else if (room.turnsPlayer === room.players[3]) {
-        piece.position = piece.position + 31 + room.dice;
+        piece.position = piece.position + 34 + room.dice;
       }
     } else {
       movePieceCorrectly(piece);

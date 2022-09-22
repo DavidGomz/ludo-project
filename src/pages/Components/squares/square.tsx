@@ -50,6 +50,7 @@ const square = ({ color, id }: Props) => {
       className={`w-[33.33%] h-[16.667%] float-left border-[#202020] border bg-[${color}]`}
     >
       <div className="relative w-full h-full flex">
+        <>{id}</>
         {room
           ? getPiece()?.map((piece, index, array) => {
               return (
