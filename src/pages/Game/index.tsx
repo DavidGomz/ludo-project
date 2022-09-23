@@ -5,6 +5,7 @@ import TriangleRight from '../Components/triangles/triangle-right';
 import TriangleUp from '../Components/triangles/triangle-up';
 import TriangleLeft from '../Components/triangles/triangle-left';
 import TriangleDown from '../Components/triangles/triangle-down';
+import DiceRoll from '../Dice/dice';
 import { useEffect, useState } from 'react';
 import { useApi } from '../../services/api';
 import { Cases } from './cases';
@@ -444,6 +445,7 @@ export const Game = () => {
               <Cases player={room.players[2]} playerIndex={2} />
             </div>
           </div>
+          <DiceRoll />
         </div>
       )}
     </div>

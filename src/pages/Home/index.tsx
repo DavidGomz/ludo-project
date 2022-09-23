@@ -3,7 +3,7 @@
 import superLudo from '../../assets/images/Super Ludo.svg';
 
 import entrar from '../../assets/images/Entrar.svg';
-
+import DiceRoll from '../Dice/dice';
 import volumeMedium from '../../assets/images/volume-medium.svg';
 
 import { useApi } from '../../services/api';
@@ -43,6 +43,7 @@ export const Home = () => {
         src={volumeMedium}
         alt="sound-page"
       />
+      <DiceRoll />
     </div>
   );
 };
