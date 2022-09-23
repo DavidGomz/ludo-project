@@ -27,7 +27,7 @@ interface PropTypes {
 }
 
 export const Cases = ({ player, playerIndex }: PropTypes) => {
-  const { playerID, sumPiecePosition, passTurn } = useApi();
+  const { playerID, room, moving, diceDiced } = useApi();
 
   function getImage() {
     if (playerIndex === 0) return Mario;
@@ -61,14 +61,16 @@ export const Cases = ({ player, playerIndex }: PropTypes) => {
                 <img
                   src={getImage()}
                   className="h-4/5"
+                  style={{
+                    cursor: piece.playerID === playerID ? 'pointer' : 'auto',
+                  }}
                   onClick={() => {
                     if (
-                      player.id === playerID &&
-                      sumPiecePosition &&
-                      passTurn
+                      player.id === room?.turnsPlayer.id &&
+                      diceDiced !== null &&
+                      moving
                     ) {
-                      sumPiecePosition(piece);
-                      passTurn();
+                      moving(piece);
                     }
                   }}
                 />

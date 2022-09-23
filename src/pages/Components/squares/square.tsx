@@ -4,10 +4,12 @@ import Mario from '../../../assets/images/Mario.svg';
 import Wario from '../../../assets/images/wario.svg';
 import Luigi from '../../../assets/images/Luigi.svg';
 import Waluigi from '../../../assets/images/waluigi.svg';
+import { Background } from './background';
 
 interface Props {
-  id?: number;
+  id: number;
   color: string;
+  background?: 'star' | 'left' | 'top' | 'right' | 'bottom';
 }
 
 interface PiecesTypes {
@@ -24,8 +26,8 @@ interface DataTypes {
   height: number;
 }
 
-const square = ({ color, id }: Props) => {
-  const { room, playerID, sumPiecePosition, passTurn } = useApi();
+const square = ({ color, id, background }: Props) => {
+  const { room, playerID, moving, diceDiced } = useApi();
 
   function getImage(index: string) {
     if (index === room?.players[0].id) return Mario;
@@ -45,12 +47,27 @@ const square = ({ color, id }: Props) => {
     return arrayPieces;
   }
 
+  function getBackground() {
+    if (background === 'star') {
+      return 'bg-star bg-center bg-no-repeat';
+    } else if (background === 'left') {
+      return 'bg-redArrow bg-cover';
+    } else if (background === 'top') {
+      return 'bg-purpleArrow bg-cover';
+    } else if (background === 'right') {
+      return 'bg-yellowArrow bg-cover';
+    } else if (background === 'bottom') {
+      return 'bg-greenArrow bg-cover';
+    }
+  }
+
   return (
     <div
       className={`w-[33.33%] h-[16.667%] float-left border-[#202020] border bg-[${color}]`}
     >
       <div className="relative w-full h-full flex">
         <>{id}</>
+        {background ? <Background image={background} /> : null}
         {room
           ? getPiece()?.map((piece, index, array) => {
               return (
@@ -60,21 +77,20 @@ const square = ({ color, id }: Props) => {
                   className={`h-full absolute`}
                   style={{
                     left: `${index * 0.3}rem`,
-                    zIndex: piece.playerID === playerID ? 2 : 0,
+                    zIndex: piece.playerID === playerID ? 2 : 1,
                     opacity:
                       piece.playerID !== playerID && array.length > 1 ? 0.7 : 1,
+                    cursor: piece.playerID === playerID ? 'pointer' : 'auto',
                   }}
                   onClick={() => {
                     if (
                       piece.playerID !== playerID ||
                       room.turnsPlayer.id !== playerID ||
-                      !room.diced ||
-                      !sumPiecePosition ||
-                      !passTurn
+                      diceDiced === null ||
+                      !moving
                     )
                       return;
-                    sumPiecePosition(piece);
-                    passTurn();
+                    moving(piece);
                   }}
                 />
               );
