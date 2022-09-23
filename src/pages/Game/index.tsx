@@ -1,6 +1,8 @@
 // Pagina para elaboração do jogo
 import Square from '../Components/squares/square';
 import SquareMiddle from '../Components/squares/square-middle';
+
+import DiceRoll from '../Dice/dice';
 import { useApi } from '../../services/api';
 import { Cases } from './cases';
 import center from '../../assets/images/center.png';
@@ -163,6 +165,7 @@ export const Game = () => {
               <Cases player={room.players[2]} playerIndex={2} />
             </div>
           </div>
+          <DiceRoll />
         </div>
       )}
     </div>
