@@ -39,7 +39,7 @@ const squareMiddle = ({ color, id, background }: Props) => {
   function getPieces() {
     if (!room) return null;
     const arrayPieces: PiecesTypes[] = [];
-    room.players.forEach((player, index) => {
+    room.players.forEach((player) => {
       player.pieces.forEach((piece) => {
         if (piece.position === id) arrayPieces.push(piece);
       });
@@ -52,7 +52,6 @@ const squareMiddle = ({ color, id, background }: Props) => {
       className={`w-[16.667%] h-[33.33%] float-left border-[#202020] border bg-[${color}]`}
     >
       <div className={`relative w-full h-full flex `}>
-        <>{id}</>
         {background ? <Background image={background} /> : null}
         {room
           ? getPieces()?.map((piece, index, array) => {

@@ -6,6 +6,8 @@ import DiceRoll from '../Dice/dice';
 import { useApi } from '../../services/api';
 import { Cases } from './cases';
 import center from '../../assets/images/center.png';
+import Dice from '../Dice/dice';
+import { FinishedPieces } from './finishedPieces';
 
 interface PlayersTypes {
   id: string;
@@ -24,20 +26,10 @@ interface PiecesTypes {
 }
 
 export const Game = () => {
-  const { room, playerID, dice } = useApi();
+  const { room } = useApi();
   return (
     <div className=" bg-slate-900 min-h-full  w-full flex justify-center items-center gap-[100px] h-screen ">
-      <button
-        className="bg-white p-3 rounded"
-        onClick={() => {
-          if (room?.turnsPlayer.id === playerID && !room?.diced)
-            if (dice) {
-              dice();
-            }
-        }}
-      >
-        Jogar Dado
-      </button>
+      <Dice />
       {!room ? null : (
         <div className="w-[600px] h-[600px]">
           <div className="w-full h-2/5 flex">
@@ -101,8 +93,8 @@ export const Game = () => {
               <SquareMiddle id={46} color="#D9D9D9" />
               <SquareMiddle id={45} color="#D9D9D9" />
             </div>
-            <div className="w-1/5 h-full">
-              <img className="w-full h-full relative" src={center} />
+            <div className="w-1/5 h-full relative bg-midBoard bg-cover">
+              <FinishedPieces />
             </div>
             <div className="w-2/5 h-full">
               <SquareMiddle id={19} color="#D9D9D9" />

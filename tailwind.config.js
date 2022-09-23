@@ -9,6 +9,7 @@ module.exports = {
         purpleArrow: "url('./src/assets/images/purple.png')",
         yellowArrow: "url('./src/assets/images/yellow.png')",
         greenArrow: "url('./src/assets/images/green.png')",
+        midBoard: "url('./src/assets/images/center.png')",
       },
     },
   },

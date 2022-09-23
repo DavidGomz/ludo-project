@@ -21,11 +21,6 @@ interface PiecesTypes {
   canEntryFinal: boolean;
 }
 
-interface DataTypes {
-  width: number;
-  height: number;
-}
-
 const square = ({ color, id, background }: Props) => {
   const { room, playerID, moving, diceDiced } = useApi();
 
@@ -47,26 +42,11 @@ const square = ({ color, id, background }: Props) => {
     return arrayPieces;
   }
 
-  function getBackground() {
-    if (background === 'star') {
-      return 'bg-star bg-center bg-no-repeat';
-    } else if (background === 'left') {
-      return 'bg-redArrow bg-cover';
-    } else if (background === 'top') {
-      return 'bg-purpleArrow bg-cover';
-    } else if (background === 'right') {
-      return 'bg-yellowArrow bg-cover';
-    } else if (background === 'bottom') {
-      return 'bg-greenArrow bg-cover';
-    }
-  }
-
   return (
     <div
       className={`w-[33.33%] h-[16.667%] float-left border-[#202020] border bg-[${color}]`}
     >
       <div className="relative w-full h-full flex">
-        <>{id}</>
         {background ? <Background image={background} /> : null}
         {room
           ? getPiece()?.map((piece, index, array) => {

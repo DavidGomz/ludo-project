@@ -43,7 +43,6 @@ export const Home = () => {
         src={volumeMedium}
         alt="sound-page"
       />
-      <DiceRoll />
     </div>
   );
 };
