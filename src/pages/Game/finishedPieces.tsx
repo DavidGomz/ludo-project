@@ -12,11 +12,13 @@ export const FinishedPieces = () => {
     if (index === room?.players[0].id) return Mario;
     if (index === room?.players[1].id) return Waluigi;
     if (index === room?.players[2].id) return Wario;
-    return Luigi;
+    if (index === room?.players[3].id) return Luigi;
   }
 
   if (!room || !room.players) return <></>;
-  room.players.find((player) => cont++);
+  room.players.forEach((player) => {
+    if (player) cont++;
+  });
   if (cont !== 4) return <></>;
   return (
     <div className="w-full h-full relative">
@@ -58,25 +60,25 @@ export const FinishedPieces = () => {
       >
         <div className="w-full h-1/2 flex items-center justify-center">
           <div className="h-full w-2/6">
-            {room.players[2].pieces[0].position === 0 ? (
-              <img src={getImage(room.players[2].id)} className={`h-full`} />
+            {room.players[3].pieces[0].position === 0 ? (
+              <img src={getImage(room.players[3].id)} className={`h-full`} />
             ) : null}
           </div>
         </div>
         <div className="w-full h-1/2 flex">
           <div className="h-full w-1/2">
-            {room.players[2].pieces[1].position === 0 ? (
-              <img src={getImage(room.players[2].id)} className={`h-full`} />
+            {room.players[3].pieces[1].position === 0 ? (
+              <img src={getImage(room.players[3].id)} className={`h-full`} />
             ) : null}
           </div>
           <div className="h-full w-1/2">
-            {room.players[2].pieces[2].position === 0 ? (
-              <img src={getImage(room.players[2].id)} className={`h-full`} />
+            {room.players[3].pieces[2].position === 0 ? (
+              <img src={getImage(room.players[3].id)} className={`h-full`} />
             ) : null}
           </div>
           <div className="h-full w-1/2">
-            {room.players[2].pieces[3].position === 0 ? (
-              <img src={getImage(room.players[2].id)} className={`h-full`} />
+            {room.players[3].pieces[3].position === 0 ? (
+              <img src={getImage(room.players[3].id)} className={`h-full`} />
             ) : null}
           </div>
         </div>
@@ -89,25 +91,25 @@ export const FinishedPieces = () => {
       >
         <div className="h-full w-1/2 flex items-center justify-center">
           <div className="w-full h-2/6">
-            {room.players[3].pieces[0].position === 0 ? (
-              <img src={getImage(room.players[3].id)} className={`h-full`} />
+            {room.players[2].pieces[0].position === 0 ? (
+              <img src={getImage(room.players[2].id)} className={`h-full`} />
             ) : null}
           </div>
         </div>
         <div className="h-full w-1/2 flex-col">
           <div className="w-full h-2/6">
-            {room.players[3].pieces[1].position === 0 ? (
-              <img src={getImage(room.players[3].id)} className={`h-full`} />
+            {room.players[2].pieces[1].position === 0 ? (
+              <img src={getImage(room.players[2].id)} className={`h-full`} />
             ) : null}
           </div>
           <div className="w-full h-2/6">
-            {room.players[3].pieces[2].position === 0 ? (
-              <img src={getImage(room.players[3].id)} className={`h-full`} />
+            {room.players[2].pieces[2].position === 0 ? (
+              <img src={getImage(room.players[2].id)} className={`h-full`} />
             ) : null}
           </div>
           <div className="w-full h-2/6">
-            {room.players[3].pieces[3].position === 0 ? (
-              <img src={getImage(room.players[3].id)} className={`h-full`} />
+            {room.players[2].pieces[3].position === 0 ? (
+              <img src={getImage(room.players[2].id)} className={`h-full`} />
             ) : null}
           </div>
         </div>

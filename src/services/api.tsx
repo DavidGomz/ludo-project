@@ -97,6 +97,8 @@ export const ApiContext = ({ children }: PropTypes) => {
 
           case 'roomUpdate':
             setRoom(msg.room);
+
+            navigate('/game');
             break;
 
           case 'updateRoomRequest':
@@ -120,8 +122,8 @@ export const ApiContext = ({ children }: PropTypes) => {
             break;
           case 'selectAPiece':
             console.log(`Selecione uma das peças: `, msg.pieces);
-
             setCharacters(msg.pieces);
+            navigate('/characters');
 
             break;
         }
@@ -130,33 +132,21 @@ export const ApiContext = ({ children }: PropTypes) => {
   }
 
   function init(name: string) {
-    try {
-      let msgInit = {
-        type: 'setName',
-        playerName: name,
-        playerID: playerID,
-      };
-      ws?.send(JSON.stringify(msgInit));
-      navigate('/characters');
-    } catch (err) {
-      console.log(err);
-      navigate('/');
-    }
+    let msgInit = {
+      type: 'setName',
+      playerName: name,
+      playerID: playerID,
+    };
+    ws?.send(JSON.stringify(msgInit));
   }
 
   function selectPerson(index: number) {
-    try {
-      ws.send(
-        JSON.stringify({
-          type: 'selectedPiece',
-          position: index,
-        }),
-      );
-      navigate('/game');
-    } catch (err) {
-      console.log(err);
-      navigate('/');
-    }
+    ws.send(
+      JSON.stringify({
+        type: 'selectedPiece',
+        position: index,
+      }),
+    );
   }
 
   function turn() {

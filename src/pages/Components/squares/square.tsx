@@ -24,6 +24,31 @@ interface PiecesTypes {
 const square = ({ color, id, background }: Props) => {
   const { room, playerID, moving, diceDiced } = useApi();
 
+  function getFinalCase() {
+    let playerIndex;
+    let value;
+
+    room?.players.forEach((player, index) => {
+      if (player.id === room.turnsPlayer.id) playerIndex = index;
+    });
+    if (typeof playerIndex !== 'number') return false;
+    switch (playerIndex) {
+      case 0:
+        value = 106;
+        break;
+      case 1:
+        value = 111;
+        break;
+      case 2:
+        value = 116;
+        break;
+      case 3:
+        value = 121;
+        break;
+    }
+    return value;
+  }
+
   function getImage(index: string) {
     if (index === room?.players[0].id) return Mario;
     if (index === room?.players[1].id) return Waluigi;
@@ -64,11 +89,14 @@ const square = ({ color, id, background }: Props) => {
                     cursor: piece.playerID === playerID ? 'pointer' : 'auto',
                   }}
                   onClick={() => {
+                    const final = getFinalCase();
                     if (
                       piece.playerID !== playerID ||
                       room.turnsPlayer.id !== playerID ||
                       diceDiced === null ||
-                      !moving
+                      !moving ||
+                      typeof final !== 'number' ||
+                      final < diceDiced + piece.position
                     )
                       return;
                     moving(piece);
