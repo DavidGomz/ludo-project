@@ -113,7 +113,11 @@ export const ApiContext = ({ children }: PropTypes) => {
             );
             break;
           case 'makeAMove':
-            setDiceDiced(msg.dice);
+            if (msg.dice !== null) {
+              setDiceDiced(msg.dice);
+              console.log('Dado', msg.dice);
+            }
+
             break;
 
           case 'updateMsg':
