@@ -4,6 +4,11 @@ module.exports = {
   theme: {
     fontFamily: {
       inter: ['Inter'],
+      play: ['Press Start 2P', 'cursive'],
+    },
+    fontSize: {
+      test1: '1rem',
+      test2: '.875rem',
     },
     extend: {
       backgroundImage: {

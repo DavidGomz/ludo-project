@@ -1,6 +1,7 @@
 // Pagina para elaboração do jogo
 import Square from '../Components/squares/square';
 import SquareMiddle from '../Components/squares/square-middle';
+import PlayerName from '../Components/PlayersNames/playerName';
 
 import DiceRoll from '../Dice/dice';
 import { useApi } from '../../services/api';
@@ -28,7 +29,8 @@ interface PiecesTypes {
 export const Game = () => {
   const { room } = useApi();
   return (
-    <div className=" bg-slate-900 min-h-full  w-full flex justify-center items-center gap-[100px] h-screen ">
+    <div className=" bg-slate-900 min-h-full  w-full flex justify-center items-center gap-[100px] h-screen">
+      <PlayerName playerName="JUKE" playerColor="red" />
       <Dice />
       <div className="w-[600px] h-[600px]">
         <div className="w-full h-2/5 flex">

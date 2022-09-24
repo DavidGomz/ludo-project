@@ -3,6 +3,22 @@
 @tailwind utilities;
 @tailwind variants;
 
+body {
+  font-family: 'Press Start 2P';
+}
+
+@screen md {
+  font-size: 17px;
+}
+@screen lg {
+  font-size: 26px;
+}
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('/src/font/PressStart2P-Regular.ttf');
+}
+
 * {
   @apply m-0 p-0 box-border outline-none;
 }
