@@ -57,7 +57,7 @@ export const Cases = ({ player, playerIndex }: PropTypes) => {
               key={index}
               className="w-[35%] h-[35%] m-[7.5%] float-left bg-[#D9D9D9] rounded-full justify-center items-center flex"
             >
-              {!piece.position ? (
+              {piece.position === null ? (
                 <img
                   src={getImage()}
                   className="h-4/5"
