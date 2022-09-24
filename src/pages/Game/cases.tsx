@@ -22,7 +22,7 @@ interface PiecesTypes {
 }
 
 interface PropTypes {
-  player: PlayersTypes;
+  player?: PlayersTypes;
   playerIndex: number;
 }
 

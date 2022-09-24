@@ -35,9 +35,10 @@ const square = ({ color, id, background }: Props) => {
     if (!room) return null;
     const arrayPieces: PiecesTypes[] = [];
     room.players.forEach((player) => {
-      player.pieces.forEach((piece) => {
-        if (piece.position === id) arrayPieces.push(piece);
-      });
+      if (player)
+        player.pieces.forEach((piece) => {
+          if (piece.position === id) arrayPieces.push(piece);
+        });
     });
     return arrayPieces;
   }

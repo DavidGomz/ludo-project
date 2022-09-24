@@ -45,6 +45,8 @@ interface ContextTypes {
   init: (name: string) => void;
   dice: () => void;
   moving: (piece: PiecesTypes) => void;
+  characters: number[] | null;
+  selectPerson: (index: number) => void;
 }
 
 interface PropTypes {
@@ -57,6 +59,7 @@ export const ApiContext = ({ children }: PropTypes) => {
   const navigate = useNavigate();
   const [playerID, setPlayerID] = useState<string>('');
   const [player, setPlayer] = useState<PlayersTypes>();
+  const [characters, setCharacters] = useState<number[] | null>(null);
   const [room, setRoom] = useState<RoomTypes>();
   const [ws, setWs] = useState(new WebSocket('ws://localhost:9999'));
   const [diceDiced, setDiceDiced] = useState<number | null>(null);
@@ -115,19 +118,45 @@ export const ApiContext = ({ children }: PropTypes) => {
             console.log(msg.updateMsg);
 
             break;
+          case 'selectAPiece':
+            console.log(`Selecione uma das peças: `, msg.pieces);
+
+            setCharacters(msg.pieces);
+
+            break;
         }
       };
     }
   }
 
   function init(name: string) {
-    let msgInit = {
-      type: 'initPlayer',
-      playerName: name,
-      playerID: playerID,
-    };
-    ws?.send(JSON.stringify(msgInit));
-    navigate('game');
+    try {
+      let msgInit = {
+        type: 'setName',
+        playerName: name,
+        playerID: playerID,
+      };
+      ws?.send(JSON.stringify(msgInit));
+      navigate('/characters');
+    } catch (err) {
+      console.log(err);
+      navigate('/');
+    }
+  }
+
+  function selectPerson(index: number) {
+    try {
+      ws.send(
+        JSON.stringify({
+          type: 'selectedPiece',
+          position: index,
+        }),
+      );
+      navigate('/game');
+    } catch (err) {
+      console.log(err);
+      navigate('/');
+    }
   }
 
   function turn() {
@@ -176,6 +205,8 @@ export const ApiContext = ({ children }: PropTypes) => {
         dice,
         diceDiced,
         moving,
+        characters,
+        selectPerson,
       }}
     >
       {children}

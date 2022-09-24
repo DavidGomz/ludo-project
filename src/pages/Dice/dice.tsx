@@ -14,19 +14,30 @@ const Dice = () => {
   const [url, setURL] = useState(dice1);
   const { diceDiced, dice, room, playerID } = useApi();
   function handleClick() {
+    console.log('Entrei', diceDiced);
     if (diceDiced) {
+      console.log(diceDiced);
       setURL(imagesPath[diceDiced]);
     }
   }
+
+  function getAnimation() {
+    if (!room?.turnsPlayer) return '';
+    if (!diceDiced && room?.turnsPlayer.id === playerID)
+      return 'animate-bounce';
+    return '';
+  }
+
   return (
     <div className="w-[100] h-[100] ">
       <img
         src={url}
-        className="bg-slate-200 cursor-pointer bg-transparent animate-bounce"
+        className={`bg-slate-200 cursor-pointer bg-transparent ${getAnimation()}`}
         onClick={() => {
-          if (!dice || !room || room.turnsPlayer.id !== playerID) return;
+          if (!dice || !room || room.turnsPlayer.id !== playerID || diceDiced)
+            return;
           dice();
-          setTimeout(() => handleClick(), 3000);
+          handleClick();
         }}
         alt=""
       />
