@@ -15,7 +15,7 @@ export const Home = () => {
 
   return (
     <div className="bg-[url('./src/assets/images/background.jpg')] min-h-full  w-full grid place-content-center h-screen">
-      <div className="max-w-xl min-h-full min-w w-full h-96 pt-12 pb-16 pl-16 pr-16 bg-[#282A42] shadow-[#106ae0] shadow-lg ">
+      <div className="max-w-xl min-h-full min-w w-full h-96 pt-12 pb-16 pl-16 pr-16 bg-[#282A42] shadow-[#106ae0] shadow-lg rounded">
         <img src={superLudo} alt="game-Logo" />
         <div className="flex flex-col justify-center  items-center">
           <input
