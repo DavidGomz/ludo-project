@@ -3,11 +3,9 @@
 import superLudo from '../../assets/images/Super Ludo.svg';
 import entrar from '../../assets/images/Entrar.svg';
 import volumeMedium from '../../assets/images/volume-medium.svg';
-import WebChat from '../Components/chat/chat';
-import wallpaper from '../../assets/images/background.jpg';
 
 import { useApi } from '../../services/api';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 
 export const Home = () => {
   const { init } = useApi();
@@ -29,7 +27,7 @@ export const Home = () => {
           <button
             className="w-[210px] mt-12 bg-gray-200 h-12 rounded-3xl flex justify-center items-center cursor-pointer"
             onClick={() => {
-              if (init && name.length > 3) {
+              if (init && name.length > 3 && name.length < 15) {
                 init(name);
               }
             }}

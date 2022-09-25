@@ -1,31 +1,106 @@
+import { PaperPlaneRight } from 'phosphor-react';
 import PlayerName from '../PlayersNames/playerName';
 
 const webChat = () => {
   return (
-    <div className="w-[350px] h-[50vh] flex flex-col shadow-[#000000] shadow-lg bg-black text-center">
-      <div className="header text-white">
+    <div className="w-full h-3/6 flex flex-col bg-white text-center min-w-[350px] min-h-[220px]">
+      <div className="text-white bg-cyan-500 py-1">
         <h1>LudoChat</h1>
       </div>
-      <div className="body  flex  flex-col flex-1 justify-center items-center p-[20px,30px] h-screen bg-white">
-        <p className="system-message ml-auto font-inter text-black p-[15px] w-fit rounded-lg mb-[15px]">
-          É SUA VEZ DE JOGAR
-        </p>
-        <p className="user_message mr-auto rounded-[2px] font-intertext-black">
-          <PlayerName playerName="jogador 1" playerColor="red" />
-        </p>
+      <div className="w-full h-full overflow-auto">
+        <div className="w-full flex flex-col-reverse justify-end gap-1">
+          {/* mensagens de outros players */}
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+          <div className="flex flex-col flex-1 p-4 h-screen text-left bg-white text-[0.7rem] font-inter text-black">
+            <PlayerName
+              playerName="jogador 1:"
+              playerColor="red"
+              fontSize="0.7rem"
+            />
+            <p></p>
+          </div>
+        </div>
       </div>
-      <div className="footer">
-        <form className="flex">
-          <input
-            type="text"
-            name=""
-            className="flex flex-1  w-[100px] h-[40px] border-outline-none pl-1 text-lg"
-          />
-          <button className="w-[100px] text-lg border-none outline-none bg-cyan-500 text-white cursor-pointer hover:bg-sky-700 transition-ease">
-            SEND
-          </button>
-        </form>
-      </div>
+      <form className="flex border-l-2 border-cyan-500">
+        <input
+          type="text"
+          className="flex flex-1 w-[100px] h-[40px] pl-1 text-lg"
+        />
+        <button className="text-base border-none bg-cyan-500 text-white cursor-pointer hover:bg-sky-700 transition-ease p-2">
+          Enviar
+        </button>
+      </form>
     </div>
   );
 };

@@ -1,7 +1,6 @@
 import {
   createContext,
   ReactNode,
-  useCallback,
   useContext,
   useEffect,
   useState,
@@ -30,15 +29,12 @@ interface RoomTypes {
   id: string;
   turnsPlayer: PlayersTypes;
   turn: number | null;
-  dice: number | null;
-  diced: boolean;
   killed: boolean;
   players: PlayersTypes[];
 }
 
 interface ContextTypes {
   playerID: string;
-  player: PlayersTypes;
   room: RoomTypes;
   diceDiced: number | null;
   connect: () => void;
@@ -58,7 +54,6 @@ const GameContext = createContext<Partial<ContextTypes>>({});
 export const ApiContext = ({ children }: PropTypes) => {
   const navigate = useNavigate();
   const [playerID, setPlayerID] = useState<string>('');
-  const [player, setPlayer] = useState<PlayersTypes>();
   const [characters, setCharacters] = useState<number[] | null>(null);
   const [room, setRoom] = useState<RoomTypes>();
   const [ws, setWs] = useState(new WebSocket('ws://localhost:9999'));
@@ -80,10 +75,6 @@ export const ApiContext = ({ children }: PropTypes) => {
     if (ws) {
       ws.onopen = () => {
         console.log('connecteeeedd');
-      };
-
-      ws.onclose = () => {
-        console.log(`${player?.name} Closssssssssssssed`);
       };
 
       ws.onmessage = (event: MessageEvent<any>) => {
@@ -115,7 +106,6 @@ export const ApiContext = ({ children }: PropTypes) => {
           case 'makeAMove':
             if (msg.dice !== null) {
               setDiceDiced(msg.dice);
-              console.log('Dado', msg.dice);
             }
 
             break;
@@ -156,7 +146,7 @@ export const ApiContext = ({ children }: PropTypes) => {
   function turn() {
     if (!room || room.turn === null) return;
     setDiceDiced(null);
-    if (player === room.turnsPlayer) {
+    if (playerID === room.turnsPlayer.id) {
       console.log(room.turnsPlayer.name + ', Eh sua vez de jogar o dado!');
     } else {
       console.log('É a vez de: ' + room.turnsPlayer.name);
@@ -192,7 +182,6 @@ export const ApiContext = ({ children }: PropTypes) => {
     <GameContext.Provider
       value={{
         playerID,
-        player,
         room,
         connect,
         init,

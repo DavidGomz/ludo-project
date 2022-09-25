@@ -32,11 +32,13 @@ const Dice = () => {
   }
 
   return (
-    <div className="w-[100] h-[100] flex ">
-      <img src={jogar} />
+    <div className="flex gap-10">
+      {!room?.turnsPlayer || room?.turnsPlayer.id !== playerID ? null : (
+        <img src={jogar} className={`${getAnimation()}`} />
+      )}
       <img
         src={url !== null && url !== undefined ? url : imagesPath[0]}
-        className={`bg-slate-200 cursor-pointer bg-transparent ${getAnimation()}`}
+        className={`w-[100px] h-[100px] bg-slate-200 cursor-pointer bg-transparent`}
         onClick={() => {
           if (!dice || !room || room.turnsPlayer.id !== playerID || diceDiced)
             return;
