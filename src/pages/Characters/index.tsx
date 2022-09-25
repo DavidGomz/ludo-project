@@ -19,17 +19,19 @@ export const Characters = () => {
 
   return (
     <div className="bg-[url('./src/assets/images/background.jpg')] w-screen h-screen flex flex-col justify-center items-center">
-      <img src={superLudo} alt="superLudo" />
-      <div className="w-[653px] h-[441px] flex flex-col justify-center items-center gap-8 bg-[#282A42] rounded-3xl">
-        <h1 className="text-[#D9D9D9]">Escolha um personagem</h1>
-        <div className="flex justify-evenly items-center rounded-3xl w-[410px] h-[140px] bg-[#404156]">
+      <img src={superLudo} alt="superludo" />
+      <div className="w-[653px] h-[441px] flex flex-col justify-center items-center gap-8 bg-[url('./src/assets/images/charbg.jpg')] bg-no-repeat rounded-xl">
+        <h1 className="text-black bg-white rounded-sm">
+          Escolha um personagem
+        </h1>
+        <div className="flex justify-evenly items-center rounded-3xl w-[410px] h-[140px] bg-[#0078FC]">
           {characters?.map((person) => (
             <div
               key={person}
-              className="w-20 h-20 rounded-full flex items-center justify-center"
+              className="w-20 h-20 rounded-full flex items-center justify-center cursor-pointer"
               style={{
                 backgroundColor:
-                  selectedPerson === person ? '#E28948' : '#D9D9D9',
+                  selectedPerson === person ? '#FEB019' : '#D9D9D9',
               }}
               onClick={() => {
                 setSelectedPerson(person);
@@ -40,7 +42,7 @@ export const Characters = () => {
           ))}
         </div>
         <button
-          className="w-[250px] h-[60px] rounded-r-full rounded-l-full bg-[#D9D9D9]"
+          className="w-[250px] h-[60px] rounded-r-full rounded-l-full bg-white"
           onClick={() => {
             if (!selectPerson || selectedPerson === null) return;
             selectPerson(selectedPerson);
