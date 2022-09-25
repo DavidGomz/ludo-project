@@ -38,10 +38,7 @@ const playerName = ({
   }
 
   return (
-    <p
-      className="font-play text-base border overflow-hidden"
-      style={getStyle()}
-    >
+    <p className="font-play text-base overflow-hidden" style={getStyle()}>
       {playerName}
     </p>
   );

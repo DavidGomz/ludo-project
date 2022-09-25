@@ -7,8 +7,6 @@ import { useApi } from '../../services/api';
 interface PlayersTypes {
   id: string;
   name: string;
-  turn: number | null;
-  color: string;
   pieces: PiecesTypes[];
 }
 

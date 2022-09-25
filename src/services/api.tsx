@@ -10,8 +10,6 @@ import { useNavigate } from 'react-router-dom';
 interface PlayersTypes {
   id: string;
   name: string;
-  turn: number | null;
-  color: string;
   pieces: PiecesTypes[];
   isBot: boolean;
 }
@@ -43,6 +41,14 @@ interface ContextTypes {
   moving: (piece: PiecesTypes) => void;
   characters: number[] | null;
   selectPerson: (index: number) => void;
+  chat: ChatTypes[];
+  playerIndex: number | null;
+}
+
+interface ChatTypes {
+  playerName?: string;
+  content: string;
+  index?: 0 | 1 | 2 | 3;
 }
 
 interface PropTypes {
@@ -53,11 +59,13 @@ const GameContext = createContext<Partial<ContextTypes>>({});
 
 export const ApiContext = ({ children }: PropTypes) => {
   const navigate = useNavigate();
-  const [playerID, setPlayerID] = useState<string>('');
+  const [playerID, setPlayerID] = useState<string>(''); // FIXME token
+  const [playerIndex, setPlayerIndex] = useState<number | null>(null);
   const [characters, setCharacters] = useState<number[] | null>(null);
   const [room, setRoom] = useState<RoomTypes>();
   const [ws, setWs] = useState(new WebSocket('ws://localhost:9999'));
   const [diceDiced, setDiceDiced] = useState<number | null>(null);
+  const [chat, setChat] = useState<ChatTypes[]>([]);
 
   useEffect(() => {
     connect();
@@ -104,10 +112,6 @@ export const ApiContext = ({ children }: PropTypes) => {
             );
             break;
           case 'makeAMove':
-            if (msg.dice !== null) {
-              setDiceDiced(msg.dice);
-            }
-
             break;
 
           case 'updateMsg':
@@ -120,6 +124,14 @@ export const ApiContext = ({ children }: PropTypes) => {
             navigate('/characters');
 
             break;
+          case 'numDado':
+            if (typeof msg.msg === 'number') setDiceDiced(msg.msg);
+            else if (typeof msg.msg === 'string' && Number(msg.msg))
+              setDiceDiced(Number(msg.msg));
+            break;
+
+          case 'chat':
+            setChat(msg.msg.chat);
         }
       };
     }
@@ -141,6 +153,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         position: index,
       }),
     );
+    setPlayerIndex(index);
   }
 
   function turn() {
@@ -190,6 +203,8 @@ export const ApiContext = ({ children }: PropTypes) => {
         moving,
         characters,
         selectPerson,
+        chat,
+        playerIndex,
       }}
     >
       {children}
