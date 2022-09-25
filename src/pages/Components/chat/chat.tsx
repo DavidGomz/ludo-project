@@ -15,7 +15,7 @@ const webChat = () => {
         </p>
       </div>
       <div className="footer">
-        <form action="" className="flex">
+        <form className="flex">
           <input
             type="text"
             name=""
