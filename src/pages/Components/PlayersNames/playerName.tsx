@@ -5,7 +5,10 @@ interface Props {
 
 const playerName = ({ playerColor, playerName }: Props) => {
   return (
-    <p className="font-play text-base" style={{ color: playerColor }}>
+    <p
+      className="font-play text-base md:text-sm"
+      style={{ color: playerColor }}
+    >
       {playerName}
     </p>
   );

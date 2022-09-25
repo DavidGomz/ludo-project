@@ -1,9 +1,10 @@
 // Pagina inicial
 
 import superLudo from '../../assets/images/Super Ludo.svg';
-
 import entrar from '../../assets/images/Entrar.svg';
 import volumeMedium from '../../assets/images/volume-medium.svg';
+import WebChat from '../Components/chat/chat';
+import wallpaper from '../../assets/images/background.jpg';
 
 import { useApi } from '../../services/api';
 import { useRef, useState } from 'react';
@@ -13,7 +14,7 @@ export const Home = () => {
   const [name, setName] = useState('');
 
   return (
-    <div className="bg-slate-900 min-h-full  w-full grid place-content-center h-screen">
+    <div className="bg-[url('./src/assets/images/background.jpg')] min-h-full  w-full grid place-content-center h-screen">
       <div className="max-w-xl min-h-full min-w w-full h-96 pt-12 pb-16 pl-16 pr-16 bg-[#282A42] shadow-[#106ae0] shadow-lg ">
         <img src={superLudo} alt="game-Logo" />
         <div className="flex flex-col justify-center  items-center">

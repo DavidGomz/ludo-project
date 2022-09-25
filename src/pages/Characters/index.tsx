@@ -17,7 +17,7 @@ export const Characters = () => {
   }
 
   return (
-    <div className="bg-slate-900 w-screen h-screen flex flex-col justify-center items-center">
+    <div className="bg-[url('./src/assets/images/background.jpg')] w-screen h-screen flex flex-col justify-center items-center">
       <div className="w-[653px] h-[441px] flex flex-col justify-center items-center gap-8 bg-[#282A42] rounded-3xl">
         <h1 className="text-[#D9D9D9]">Escolha um personagem</h1>
         <div className="flex justify-evenly items-center rounded-3xl w-[410px] h-[140px] bg-[#404156]">

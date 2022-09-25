@@ -2,7 +2,7 @@
 import Square from '../Components/squares/square';
 import SquareMiddle from '../Components/squares/square-middle';
 import PlayerName from '../Components/PlayersNames/playerName';
-
+import WebChat from '../Components/chat/chat';
 import DiceRoll from '../Dice/dice';
 import { useApi } from '../../services/api';
 import { Cases } from './cases';
@@ -29,8 +29,9 @@ interface PiecesTypes {
 export const Game = () => {
   const { room } = useApi();
   return (
-    <div className=" bg-slate-900 min-h-full  w-full flex justify-center items-center gap-[100px] h-screen">
-      <PlayerName playerName="JUKE" playerColor="red" />
+    <div className="bg-[url('./src/assets/images/background.jpg')] min-h-full  w-full flex justify-center items-center gap-[100px]  h-screen">
+      <WebChat />
+      <PlayerName playerName="Jogador 1" playerColor="red" />
       <Dice />
       <div className="w-[600px] h-[600px]">
         <div className="w-full h-2/5 flex">
