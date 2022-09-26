@@ -34,7 +34,7 @@ interface RoomTypes {
 interface ContextTypes {
   playerID: string;
   room: RoomTypes;
-  diceDiced: number | null;
+  diceDiced?: number;
   connect: () => void;
   init: (name: string) => void;
   dice: () => void;
@@ -66,7 +66,7 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [characters, setCharacters] = useState<number[] | null>(null);
   const [room, setRoom] = useState<RoomTypes>();
   const [ws, setWs] = useState(new WebSocket('ws://localhost:9999'));
-  const [diceDiced, setDiceDiced] = useState<number | null>(null);
+  const [diceDiced, setDiceDiced] = useState<number>();
   const [chat, setChat] = useState<ChatTypes[]>([]);
   const [message, setMessage] = useState<string>();
 
@@ -193,7 +193,7 @@ export const ApiContext = ({ children }: PropTypes) => {
 
   function turn() {
     if (!room || room.turn === null) return;
-    setDiceDiced(null);
+    setDiceDiced(undefined);
     if (playerID === room.turnsPlayer.id) {
       setMessage('Sua vez');
     } else {

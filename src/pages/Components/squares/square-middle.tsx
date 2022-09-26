@@ -95,16 +95,17 @@ const squareMiddle = ({ color, id, background }: Props) => {
                   }}
                   onClick={() => {
                     const final = getFinalCase();
-                    if (
-                      piece.playerID !== playerID ||
-                      room.turnsPlayer.id !== playerID ||
-                      diceDiced === null ||
-                      !moving ||
-                      typeof final !== 'number' ||
-                      final < diceDiced + piece.position
-                    )
-                      return;
-                    moving(piece);
+                    if (diceDiced && piece.position) {
+                      if (
+                        piece.playerID !== playerID ||
+                        room.turnsPlayer.id !== playerID ||
+                        !moving ||
+                        typeof final !== 'number' ||
+                        final < diceDiced + piece.position
+                      )
+                        return;
+                      moving(piece);
+                    }
                   }}
                 />
               );
