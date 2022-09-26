@@ -44,7 +44,7 @@ interface ContextTypes {
   chat: ChatTypes[];
   playerIndex: number | null;
   message?: string;
-  sendMessageChat: (content: string) => void;
+  sendChatMessage: (content: string) => void;
 }
 
 interface ChatTypes {
@@ -158,7 +158,7 @@ export const ApiContext = ({ children }: PropTypes) => {
             break;
 
           case 'chat':
-            setChat(msg.msg.chat);
+            setChat(msg.msg);
         }
       };
     }
@@ -241,6 +241,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         chat,
         playerIndex,
         message,
+        sendChatMessage,
       }}
     >
       {children}

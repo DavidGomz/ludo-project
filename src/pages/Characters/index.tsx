@@ -5,7 +5,6 @@ import superLudo from '../../assets/images/Super Ludo.svg';
 import Waluigi from '../../assets/images/waluigi.svg';
 import { useState } from 'react';
 import { useApi } from '../../services/api';
-import FinalResult from '../../pages/Final-Page';
 
 export const Characters = () => {
   const { characters, selectPerson } = useApi();
@@ -52,7 +51,6 @@ export const Characters = () => {
           Prosseguir
         </button>
       </div>
-      <FinalResult />
     </div>
   );
 };
