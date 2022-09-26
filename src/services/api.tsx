@@ -172,7 +172,7 @@ export const ApiContext = ({ children }: PropTypes) => {
             ws.send(JSON.stringify({ type: 'sendUpdatedRoom' }));
             break;
 
-          case 'ableDiceButton':
+          case 'ableDiceBtn':
             setCanDice(true);
             break;
         }
