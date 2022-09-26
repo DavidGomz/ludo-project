@@ -94,6 +94,8 @@ export const ApiContext = ({ children }: PropTypes) => {
         switch (msg.type) {
           case 'identifier':
             setPlayerID(msg.playerID);
+            localStorage.setItem('token', msg.token);
+            console.log(localStorage.getItem('token'));
 
             break;
 
@@ -113,6 +115,7 @@ export const ApiContext = ({ children }: PropTypes) => {
                 }),
               ),
             );
+            console.log('Reestabelecendo conexao');
             break;
           case 'makeAMove':
             setMessage('Escolha uma peça');
@@ -127,10 +130,31 @@ export const ApiContext = ({ children }: PropTypes) => {
             navigate('/characters');
 
             break;
+
           case 'numDado':
             if (typeof msg.msg === 'number') setDiceDiced(msg.msg);
             else if (typeof msg.msg === 'string' && Number(msg.msg))
               setDiceDiced(Number(msg.msg));
+            break;
+
+          case 'verifyConnection':
+            let token = localStorage.getItem('token');
+
+            if (token) {
+              ws.send(
+                JSON.stringify({
+                  type: 'reconnection',
+                  token: token,
+                }),
+              );
+            } else {
+              ws.send(
+                JSON.stringify({
+                  type: 'initPlayer',
+                }),
+              );
+            }
+
             break;
 
           case 'chat':
