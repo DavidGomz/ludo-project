@@ -4,8 +4,9 @@ import playerName from '../PlayersNames/playerName';
 import PlayerName from '../PlayersNames/playerName';
 
 const webChat = () => {
-  const { chat, playerIndex } = useApi();
+  const { chat, playerIndex, sendChatMessage } = useApi();
   const divOverflow = useRef<HTMLDivElement | null>(null);
+  const inputElement = useRef<HTMLInputElement | null>(null);
 
   function getColor(index?: number) {
     if (index === 0) return '#F84020';
@@ -68,15 +69,23 @@ const webChat = () => {
             : null}
         </div>
       </div>
-      <form className="flex border-2 border-cyan-500">
+      <div className="flex border-2 border-cyan-500">
         <input
           type="text"
           className="flex flex-1 w-[100px] h-[40px] pl-1 text-lg"
+          ref={inputElement}
         />
-        <button className="text-base bg-cyan-500 text-white cursor-pointer hover:bg-sky-700 transition-ease p-2">
+        <button
+          className="text-base bg-cyan-500 text-white cursor-pointer hover:bg-sky-700 transition-ease p-2"
+          onClick={() => {
+            if (!sendChatMessage || inputElement.current === null) return;
+            sendChatMessage(inputElement.current.value);
+            inputElement.current.value = '';
+          }}
+        >
           Enviar
         </button>
-      </form>
+      </div>
     </div>
   );
 };
