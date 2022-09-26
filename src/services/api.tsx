@@ -159,6 +159,14 @@ export const ApiContext = ({ children }: PropTypes) => {
 
           case 'chat':
             setChat(msg.msg);
+            break;
+
+          case 'reconnected':
+            setPlayerID(msg.playerID);
+            setPlayerIndex(msg.index);
+            setChat(msg.chat);
+            ws.send(JSON.stringify({ type: 'sendUpdatedRoom' }));
+            break;
         }
       };
     }
