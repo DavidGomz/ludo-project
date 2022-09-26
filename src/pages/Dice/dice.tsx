@@ -15,17 +15,17 @@ export const imagesPath = [dice1, dice2, dice3, dice4, dice5, dice6];
 
 const Dice = () => {
   const [url, setURL] = useState(dice1);
-  const { diceDiced, dice, room, playerID } = useApi();
+  const { diceNumber, dice, room, playerID, canDice } = useApi();
 
   useEffect(() => {
-    if (diceDiced !== null && diceDiced !== undefined) {
-      setURL(imagesPath[diceDiced - 1]);
+    if (diceNumber !== null && diceNumber !== undefined) {
+      setURL(imagesPath[diceNumber - 1]);
     }
-  }, [diceDiced]);
+  }, [diceNumber]);
 
   function getAnimation() {
     if (!room?.turnsPlayer) return '';
-    if (!diceDiced && room?.turnsPlayer.id === playerID)
+    if (!diceNumber && room?.turnsPlayer.id === playerID)
       return 'animate-bounce';
     return '';
   }
@@ -39,7 +39,7 @@ const Dice = () => {
         src={url !== null && url !== undefined ? url : imagesPath[0]}
         className={`w-[100px] h-[100px] bg-slate-200 cursor-pointer bg-transparent`}
         onClick={() => {
-          if (!dice || !room || room.turnsPlayer.id !== playerID || diceDiced)
+          if (!dice || !room || room.turnsPlayer.id !== playerID || !canDice)
             return;
           dice();
         }}

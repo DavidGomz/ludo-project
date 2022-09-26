@@ -22,7 +22,7 @@ interface PiecesTypes {
 }
 
 const square = ({ color, id, background }: Props) => {
-  const { room, playerID, moving, diceDiced } = useApi();
+  const { room, playerID, moving, diceNumber } = useApi();
 
   function getFinalCase() {
     let playerIndex;
@@ -90,13 +90,13 @@ const square = ({ color, id, background }: Props) => {
                   }}
                   onClick={() => {
                     const final = getFinalCase();
-                    if (diceDiced && piece.position) {
+                    if (diceNumber && piece.position) {
                       if (
                         piece.playerID !== playerID ||
                         room.turnsPlayer.id !== playerID ||
                         !moving ||
                         typeof final !== 'number' ||
-                        final < diceDiced + piece.position
+                        final < diceNumber + piece.position
                       )
                         return;
                       moving(piece);
