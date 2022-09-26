@@ -19,7 +19,7 @@ export const Characters = () => {
   }
 
   return (
-    <div className="bg-[url('./src/assets/images/background.jpg')] w-screen h-screen flex flex-col justify-center items-center">
+    <div className="bg-[url('./src/assets/images/background.jpg')] w-screen h-screen bg-no-repeat  flex flex-col justify-center items-center">
       <img src={superLudo} alt="superludo" />
       <div className="w-[653px] h-[441px] flex flex-col justify-center items-center gap-8 bg-[url('./src/assets/images/charbg.jpg')] bg-no-repeat rounded-xl">
         <h1 className="text-black bg-white rounded-sm">
