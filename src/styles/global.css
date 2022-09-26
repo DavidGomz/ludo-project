@@ -3,6 +3,17 @@
 @tailwind utilities;
 @tailwind variants;
 
+body {
+  font-family: 'Press Start 2P';
+  background-image:"url('./src/assets/images/background.jpg')";
+  background-repeat: no-repeat;
+}
+
+@font-face {
+  font-family: 'Press Start 2P';
+  src: url('/src/font/PressStart2P-Regular.ttf');
+}
+
 * {
   @apply m-0 p-0 box-border outline-none;
 }
