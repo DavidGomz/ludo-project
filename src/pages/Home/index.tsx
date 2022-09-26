@@ -10,6 +10,7 @@ import { useState } from 'react';
 export const Home = () => {
   const { init } = useApi();
   const [name, setName] = useState('');
+  const [alert, setAlert] = useState<string>();
 
   return (
     <div className="bg-[url('./src/assets/images/background.jpg')] min-h-full  w-full grid place-content-center h-screen">
@@ -24,11 +25,20 @@ export const Home = () => {
               setName(e.target.value);
             }}
           />
+          <p className="text-[#F84020]">{alert}</p>
           <button
             className="w-[210px] mt-12 bg-gray-200 h-12 rounded-3xl flex justify-center items-center cursor-pointer"
             onClick={() => {
-              if (init && name.length > 3 && name.length < 15) {
-                init(name);
+              if (name.length < 3) {
+                setAlert('Nome muito curto!');
+                return;
+              } else if (name.length > 16) {
+                setAlert('Nome muito longo!');
+                return;
+              } else {
+                if (init) {
+                  init(name);
+                }
               }
             }}
           >

@@ -19,7 +19,6 @@ const Dice = () => {
 
   useEffect(() => {
     if (diceDiced !== null && diceDiced !== undefined) {
-      console.log(diceDiced);
       setURL(imagesPath[diceDiced - 1]);
     }
   }, [diceDiced]);

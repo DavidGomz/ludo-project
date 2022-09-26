@@ -43,6 +43,8 @@ interface ContextTypes {
   selectPerson: (index: number) => void;
   chat: ChatTypes[];
   playerIndex: number | null;
+  message?: string;
+  sendMessageChat: (content: string) => void;
 }
 
 interface ChatTypes {
@@ -66,6 +68,7 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [ws, setWs] = useState(new WebSocket('ws://localhost:9999'));
   const [diceDiced, setDiceDiced] = useState<number | null>(null);
   const [chat, setChat] = useState<ChatTypes[]>([]);
+  const [message, setMessage] = useState<string>();
 
   useEffect(() => {
     connect();
@@ -75,7 +78,7 @@ export const ApiContext = ({ children }: PropTypes) => {
     if (room) {
       if (room.turn !== null) {
         turn();
-      }
+      } else setMessage('Aguardando outros jogadores...');
     }
   }, [room]);
 
@@ -112,14 +115,14 @@ export const ApiContext = ({ children }: PropTypes) => {
             );
             break;
           case 'makeAMove':
+            setMessage('Escolha uma peça');
             break;
 
           case 'updateMsg':
-            console.log(msg.updateMsg);
+            setMessage(msg.msg.updateMsg);
 
             break;
           case 'selectAPiece':
-            console.log(`Selecione uma das peças: `, msg.pieces);
             setCharacters(msg.pieces);
             navigate('/characters');
 
@@ -160,9 +163,9 @@ export const ApiContext = ({ children }: PropTypes) => {
     if (!room || room.turn === null) return;
     setDiceDiced(null);
     if (playerID === room.turnsPlayer.id) {
-      console.log(room.turnsPlayer.name + ', Eh sua vez de jogar o dado!');
+      setMessage('Sua vez');
     } else {
-      console.log('É a vez de: ' + room.turnsPlayer.name);
+      setMessage('É a vez de ' + room.turnsPlayer.name);
     }
   }
 
@@ -176,6 +179,16 @@ export const ApiContext = ({ children }: PropTypes) => {
     ws.send(JSON.stringify(msgDado));
   }
 
+  function sendChatMessage(content: string) {
+    if (content && content !== '') {
+      let msgChat = {
+        type: 'chat',
+        content: content,
+      };
+      ws?.send(JSON.stringify(msgChat));
+    }
+  }
+
   function moving(piece: PiecesTypes) {
     if (piece.position !== null || diceDiced == 6) {
       ws.send(
@@ -185,9 +198,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         }),
       );
     } else if (piece.position === null) {
-      console.log(
-        'ce num tirou 6 véi, então clica numa pc q ja tá em jogo parça',
-      );
+      setMessage('Você não pode escolher essa peça');
     }
   }
 
@@ -205,6 +216,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         selectPerson,
         chat,
         playerIndex,
+        message,
       }}
     >
       {children}
