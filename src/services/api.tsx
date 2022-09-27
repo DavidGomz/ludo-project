@@ -47,12 +47,18 @@ interface ContextTypes {
   sendChatMessage: (content: string) => void;
   canDice: boolean;
   playAgain: (confirm: boolean) => void;
+  winner: WinnerProps;
 }
 
 interface ChatTypes {
   playerName?: string;
   content: string;
   index?: 0 | 1 | 2 | 3;
+}
+
+interface WinnerProps {
+  winnerName: string;
+  winnerIndex: number;
 }
 
 interface PropTypes {
@@ -72,7 +78,10 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [chat, setChat] = useState<ChatTypes[]>([]);
   const [message, setMessage] = useState<string>();
   const [canDice, setCanDice] = useState(false);
-  const [winner, setWinner] = useState();
+  const [winner, setWinner] = useState<WinnerProps>({
+    winnerIndex: 0,
+    winnerName: 'Douglas',
+  });
 
   useEffect(() => {
     connect();
@@ -177,6 +186,7 @@ export const ApiContext = ({ children }: PropTypes) => {
 
           case 'finalizingGame':
             console.log(msg);
+            setWinner(msg.msg);
             navigate('final');
             break;
 
@@ -272,6 +282,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         sendChatMessage,
         canDice,
         playAgain,
+        winner,
       }}
     >
       {children}
