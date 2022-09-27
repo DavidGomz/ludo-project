@@ -26,7 +26,6 @@ const Dice = () => {
   }, [diceNumber, canDice]);
 
   function getAnimation() {
-    console.log('verificando if', !clicked);
     if (!clicked) return 'animate-bounce';
     return '';
   }

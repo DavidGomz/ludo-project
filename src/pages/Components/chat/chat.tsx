@@ -22,7 +22,6 @@ const webChat = () => {
     const isScrolled =
       divOverflow.current.scrollTop ==
       divOverflow.current.scrollHeight - divOverflow.current.offsetHeight;
-    console.log(divOverflow.current.scrollHeight);
 
     if (!isScrolled)
       divOverflow.current.scrollTop = divOverflow.current.scrollHeight;
