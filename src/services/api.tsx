@@ -176,6 +176,10 @@ export const ApiContext = ({ children }: PropTypes) => {
 
           case 'finalizingGame':
             console.log(msg);
+
+          case 'selectAName':
+            navigate('/');
+            break;
         }
       };
     }

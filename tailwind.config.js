@@ -18,7 +18,7 @@ module.exports = {
         yellowArrow: "url('./src/assets/images/yellow.png')",
         greenArrow: "url('./src/assets/images/green.png')",
         midBoard: "url('./src/assets/images/center.png')",
-        wallpaper: "url('./src/assets/images/background.jpg')",
+        wallpaper: 'url(./src/assets/images/background.jpg)',
         charbg: "url('./src/assets/images/charbg.jpg')",
       },
       animation: {

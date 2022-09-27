@@ -4,7 +4,7 @@ import Mario from '../../assets/images/Mario.svg';
 
 export const FinalResult = () => {
   return (
-    <div className="bg-[url('./src/assets/images/background.jpg')] bg-no-repeat min-h-full  w-full grid place-content-center h-screen">
+    <div className="min-h-full  w-full grid place-content-center h-screen">
       <div className="text-white text-center w-full bg-[#FEB019] py-1 rounded-t-xl">
         <h1>Vitória</h1>
       </div>
