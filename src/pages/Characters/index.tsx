@@ -2,6 +2,7 @@ import Mario from '../../assets/images/Mario.svg';
 import Wario from '../../assets/images/wario.svg';
 import Luigi from '../../assets/images/Luigi.svg';
 import superLudo from '../../assets/images/Super Ludo.svg';
+import GameSound from '../GameSound/sound';
 import Waluigi from '../../assets/images/waluigi.svg';
 import { useState } from 'react';
 import { useApi } from '../../services/api';
@@ -41,6 +42,7 @@ export const Characters = () => {
             </div>
           ))}
         </div>
+        <GameSound />
         <button
           className="w-[250px] h-[60px] rounded-r-full rounded-l-full bg-white"
           onClick={() => {
