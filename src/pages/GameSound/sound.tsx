@@ -4,6 +4,7 @@ import MuteVolume from '../../assets/images/volume-mute.svg';
 
 const GameSound = () => {
   let marioSound = new Audio(MarioSound);
+  marioSound.loop = true;
   return (
     <div className="flex">
       <button
