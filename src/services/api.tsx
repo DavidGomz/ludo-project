@@ -62,7 +62,7 @@ const GameContext = createContext<Partial<ContextTypes>>({});
 
 export const ApiContext = ({ children }: PropTypes) => {
   const navigate = useNavigate();
-  const [playerID, setPlayerID] = useState<string>(''); // FIXME token
+  const [playerID, setPlayerID] = useState<string>('');
   const [playerIndex, setPlayerIndex] = useState<number | null>(null);
   const [characters, setCharacters] = useState<number[] | null>(null);
   const [room, setRoom] = useState<RoomTypes>();
@@ -71,18 +71,19 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [chat, setChat] = useState<ChatTypes[]>([]);
   const [message, setMessage] = useState<string>();
   const [canDice, setCanDice] = useState(false);
+  const [winner, setWinner] = useState();
 
-  useEffect(() => {
-    connect();
-  }, []);
+  // useEffect(() => {
+  //   connect();
+  // }, [playerID]);
 
-  useEffect(() => {
-    if (room) {
-      if (room.turn !== null) {
-        turn();
-      } else setMessage('Aguardando outros jogadores...');
-    }
-  }, [room]);
+  // useEffect(() => {
+  //   if (room) {
+  //     if (room.turn !== null) {
+  //       turn();
+  //     }
+  //   }
+  // }, [room]);
 
   async function connect() {
     if (ws) {
@@ -97,13 +98,11 @@ export const ApiContext = ({ children }: PropTypes) => {
           case 'identifier':
             setPlayerID(msg.playerID);
             localStorage.setItem('token', msg.token);
-            console.log(localStorage.getItem('token'));
 
             break;
 
           case 'roomUpdate':
             setRoom(msg.room);
-
             navigate('/game');
             break;
 
@@ -129,7 +128,6 @@ export const ApiContext = ({ children }: PropTypes) => {
             break;
 
           case 'selectAPiece':
-            setPlayerID(msg.playerID);
             setCharacters(msg.pieces);
             navigate('/characters');
 
@@ -175,6 +173,9 @@ export const ApiContext = ({ children }: PropTypes) => {
           case 'ableDiceBtn':
             setCanDice(true);
             break;
+
+          case 'finalizingGame':
+            console.log(msg);
         }
       };
     }
@@ -202,11 +203,6 @@ export const ApiContext = ({ children }: PropTypes) => {
   function turn() {
     if (!room || room.turn === null) return;
     setDiceNumber(undefined);
-    if (playerID === room.turnsPlayer.id) {
-      setMessage('Sua vez');
-    } else {
-      setMessage('É a vez de ' + room.turnsPlayer.name);
-    }
   }
 
   function dice() {

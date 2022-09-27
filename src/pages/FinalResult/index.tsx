@@ -2,18 +2,18 @@ import Peach from '../../assets/images/peach.svg';
 import playerName from '../Components/PlayersNames/playerName';
 import Mario from '../../assets/images/Mario.svg';
 
-export const finalResult = () => {
+export const FinalResult = () => {
   return (
     <div className="bg-[url('./src/assets/images/background.jpg')] bg-no-repeat min-h-full  w-full grid place-content-center h-screen">
       <div className="text-white text-center w-full bg-[#FEB019] py-1 rounded-t-xl">
         <h1>Vitória</h1>
       </div>
       <div className="flex  bg-[#F7F7F7] text-justify justify-center items-center rounded-b-xl w-[700px] h-[200px]">
-        <p className="text-justify text-xs">
-          Parabéns jogador 1,<br></br>
-          você venceu!<br></br>
-          Sua princesa está<br></br>
-          orgulhosa!!
+        <p className="text-justify text-xs flex flex-col">
+          <span>Parabéns "playerName",</span>
+          <span>você venceu!</span>
+          <span>Sua princesa está</span>
+          <span>orgulhosa!!</span>
         </p>
         <img
           className="w-[200px] h-[200px] animate-bounce"
@@ -33,5 +33,3 @@ export const finalResult = () => {
     </div>
   );
 };
-
-export default finalResult;
