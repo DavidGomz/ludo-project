@@ -78,10 +78,7 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [chat, setChat] = useState<ChatTypes[]>([]);
   const [message, setMessage] = useState<string>();
   const [canDice, setCanDice] = useState(false);
-  const [winner, setWinner] = useState<WinnerProps>({
-    winnerIndex: 0,
-    winnerName: 'Douglas',
-  });
+  const [winner, setWinner] = useState<WinnerProps>();
 
   useEffect(() => {
     connect();
@@ -97,9 +94,7 @@ export const ApiContext = ({ children }: PropTypes) => {
 
   async function connect() {
     if (ws) {
-      ws.onopen = () => {
-        console.log('connecteeeedd');
-      };
+      ws.onopen = () => {};
 
       ws.onmessage = (event: MessageEvent<any>) => {
         let msg = JSON.parse(event.data);
@@ -126,7 +121,6 @@ export const ApiContext = ({ children }: PropTypes) => {
                 }),
               ),
             );
-            console.log('Reestabelecendo conexao');
             break;
 
           case 'makeAMove':
@@ -134,7 +128,7 @@ export const ApiContext = ({ children }: PropTypes) => {
             break;
 
           case 'updateMsg':
-            setMessage(msg.msg.updateMsg);
+            setMessage(msg.msg);
             break;
 
           case 'selectAPiece':
@@ -185,7 +179,6 @@ export const ApiContext = ({ children }: PropTypes) => {
             break;
 
           case 'finalizingGame':
-            console.log(msg);
             setWinner(msg.msg);
             navigate('final');
             break;

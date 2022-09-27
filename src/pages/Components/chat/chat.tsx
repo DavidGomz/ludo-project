@@ -1,6 +1,5 @@
 import { useEffect, useRef } from 'react';
 import { useApi } from '../../../services/api';
-import playerName from '../PlayersNames/playerName';
 import PlayerName from '../PlayersNames/playerName';
 
 const webChat = () => {
@@ -22,7 +21,6 @@ const webChat = () => {
     const isScrolled =
       divOverflow.current.scrollTop ==
       divOverflow.current.scrollHeight - divOverflow.current.offsetHeight;
-    console.log(divOverflow.current.scrollHeight);
 
     if (!isScrolled)
       divOverflow.current.scrollTop = divOverflow.current.scrollHeight;
@@ -36,7 +34,7 @@ const webChat = () => {
       <div className="w-full h-full overflow-auto" ref={divOverflow}>
         <div className="w-full flex flex-col justify-end">
           {chat
-            ? chat.map((message) =>
+            ? chat.map((message, index) =>
                 playerIndex !== message.index ? (
                   <div className="flex flex-col p-1 text-left bg-white text-[0.7rem] font-inter text-black">
                     <PlayerName
@@ -48,6 +46,7 @@ const webChat = () => {
                       playerColor={getColor(message.index)}
                       fontSize="0.7rem"
                       width="100%"
+                      key={index}
                     />
                     <span className="w-[90%]">{message.content}</span>
                   </div>
@@ -69,10 +68,10 @@ const webChat = () => {
             : null}
         </div>
       </div>
-      <div className="flex border-2 border-cyan-500">
+      <div className="w-full flex border-2 border-cyan-500">
         <input
           type="text"
-          className="flex flex-1 w-[100px] h-[40px] pl-1 text-lg"
+          className="flex w-full h-[40px] pl-1 text-lg"
           ref={inputElement}
         />
         <button

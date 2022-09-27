@@ -11,7 +11,7 @@ import { Messages } from './messages';
 export const Game = () => {
   const { room } = useApi();
   return (
-    <div className="bg-wallpaper bg-no-repeat  min-h-full w-full flex justify-center items-center gap-[100px] h-screen">
+    <div className="min-h-full w-full flex justify-center items-center gap-[100px] h-screen">
       <div className="w-[40vw] max-w-[600px] min-w-[350px]">
         <div className="flex justify-between px-2">
           <div className="flex gap-1">
