@@ -73,17 +73,17 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [canDice, setCanDice] = useState(false);
   const [winner, setWinner] = useState();
 
-  // useEffect(() => {
-  //   connect();
-  // }, [playerID]);
+  useEffect(() => {
+    connect();
+  }, [playerID]);
 
-  // useEffect(() => {
-  //   if (room) {
-  //     if (room.turn !== null) {
-  //       turn();
-  //     }
-  //   }
-  // }, [room]);
+  useEffect(() => {
+    if (room) {
+      if (room.turn !== null) {
+        turn();
+      }
+    }
+  }, [room]);
 
   async function connect() {
     if (ws) {
