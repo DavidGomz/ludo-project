@@ -8,7 +8,7 @@ import { ApiContext } from './services/api';
 ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   <BrowserRouter>
     <ApiContext>
-      <div className="bg-wallpaper bg-cover">
+      <div className="bg-wallpaper bg-cover w-screen h-screen bg-center">
         <Router />
       </div>
     </ApiContext>

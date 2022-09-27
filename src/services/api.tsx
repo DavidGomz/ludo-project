@@ -46,6 +46,7 @@ interface ContextTypes {
   message?: string;
   sendChatMessage: (content: string) => void;
   canDice: boolean;
+  playAgain: (confirm: boolean) => void;
 }
 
 interface ChatTypes {
@@ -176,6 +177,8 @@ export const ApiContext = ({ children }: PropTypes) => {
 
           case 'finalizingGame':
             console.log(msg);
+            navigate('final');
+            break;
 
           case 'selectAName':
             navigate('/');
@@ -202,6 +205,15 @@ export const ApiContext = ({ children }: PropTypes) => {
       }),
     );
     setPlayerIndex(index);
+  }
+
+  function playAgain(confirm: boolean) {
+    ws.send(
+      JSON.stringify({
+        type: 'playAgain',
+        playAgain: confirm,
+      }),
+    );
   }
 
   function turn() {
@@ -259,6 +271,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         message,
         sendChatMessage,
         canDice,
+        playAgain,
       }}
     >
       {children}
