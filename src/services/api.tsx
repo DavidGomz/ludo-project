@@ -128,7 +128,7 @@ export const ApiContext = ({ children }: PropTypes) => {
             break;
 
           case 'updateMsg':
-            setMessage(msg.msg.updateMsg);
+            setMessage(msg.msg);
             break;
 
           case 'selectAPiece':
