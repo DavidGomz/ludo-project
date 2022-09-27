@@ -2,7 +2,7 @@
 
 import superLudo from '../../assets/images/Super Ludo.svg';
 import entrar from '../../assets/images/Entrar.svg';
-import volumeMedium from '../../assets/images/volume-medium.svg';
+import GameSound from '../GameSound/sound';
 
 import { useApi } from '../../services/api';
 import { useState } from 'react';
@@ -13,7 +13,8 @@ export const Home = () => {
   const [alert, setAlert] = useState<string>();
 
   return (
-    <div className="bg-[url('./src/assets/images/background.jpg')] bg-cover min-h-full bg-no-repeat w-full grid place-content-center h-screen">
+    <div className="bg-wallpaper bg-cover min-h-full bg-no-repeat w-full grid place-content-center h-screen">
+      <GameSound />
       <div className="max-w-xl min-h-full min-w w-full h-96 pt-12 pb-16 pl-16 pr-16 bg-[#282A42] shadow-[#106ae0] shadow-lg rounded">
         <img src={superLudo} alt="game-Logo" />
         <div className="flex flex-col justify-center  items-center">
@@ -46,11 +47,6 @@ export const Home = () => {
           </button>
         </div>
       </div>
-      <img
-        className="justify-self-end self-end mt-12 cursor-pointer"
-        src={volumeMedium}
-        alt="sound-page"
-      />
     </div>
   );
 };
