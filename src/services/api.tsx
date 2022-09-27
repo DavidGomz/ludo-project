@@ -34,7 +34,7 @@ interface RoomTypes {
 interface ContextTypes {
   playerID: string;
   room: RoomTypes;
-  diceDiced: number | null;
+  diceNumber?: number;
   connect: () => void;
   init: (name: string) => void;
   dice: () => void;
@@ -45,6 +45,7 @@ interface ContextTypes {
   playerIndex: number | null;
   message?: string;
   sendChatMessage: (content: string) => void;
+  canDice: boolean;
 }
 
 interface ChatTypes {
@@ -66,9 +67,10 @@ export const ApiContext = ({ children }: PropTypes) => {
   const [characters, setCharacters] = useState<number[] | null>(null);
   const [room, setRoom] = useState<RoomTypes>();
   const [ws, setWs] = useState(new WebSocket('ws://localhost:9999'));
-  const [diceDiced, setDiceDiced] = useState<number | null>(null);
+  const [diceNumber, setDiceNumber] = useState<number>();
   const [chat, setChat] = useState<ChatTypes[]>([]);
   const [message, setMessage] = useState<string>();
+  const [canDice, setCanDice] = useState(false);
 
   useEffect(() => {
     connect();
@@ -117,24 +119,26 @@ export const ApiContext = ({ children }: PropTypes) => {
             );
             console.log('Reestabelecendo conexao');
             break;
+
           case 'makeAMove':
             setMessage('Escolha uma peça');
             break;
 
           case 'updateMsg':
             setMessage(msg.msg.updateMsg);
-
             break;
+
           case 'selectAPiece':
+            setPlayerID(msg.playerID);
             setCharacters(msg.pieces);
             navigate('/characters');
 
             break;
 
           case 'numDado':
-            if (typeof msg.msg === 'number') setDiceDiced(msg.msg);
+            if (typeof msg.msg === 'number') setDiceNumber(msg.msg);
             else if (typeof msg.msg === 'string' && Number(msg.msg))
-              setDiceDiced(Number(msg.msg));
+              setDiceNumber(Number(msg.msg));
             break;
 
           case 'verifyConnection':
@@ -159,6 +163,18 @@ export const ApiContext = ({ children }: PropTypes) => {
 
           case 'chat':
             setChat(msg.msg);
+            break;
+
+          case 'reconnected':
+            setPlayerID(msg.playerID);
+            setPlayerIndex(msg.index);
+            setChat(msg.chat);
+            ws.send(JSON.stringify({ type: 'sendUpdatedRoom' }));
+            break;
+
+          case 'ableDiceBtn':
+            setCanDice(true);
+            break;
         }
       };
     }
@@ -185,7 +201,7 @@ export const ApiContext = ({ children }: PropTypes) => {
 
   function turn() {
     if (!room || room.turn === null) return;
-    setDiceDiced(null);
+    setDiceNumber(undefined);
     if (playerID === room.turnsPlayer.id) {
       setMessage('Sua vez');
     } else {
@@ -195,7 +211,7 @@ export const ApiContext = ({ children }: PropTypes) => {
 
   function dice() {
     if (!ws) return;
-
+    setCanDice(false);
     let msgDado = {
       type: 'dado',
     };
@@ -214,7 +230,7 @@ export const ApiContext = ({ children }: PropTypes) => {
   }
 
   function moving(piece: PiecesTypes) {
-    if (piece.position !== null || diceDiced == 6) {
+    if (piece.position !== null || diceNumber == 6) {
       ws.send(
         JSON.stringify({
           type: 'move',
@@ -234,7 +250,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         connect,
         init,
         dice,
-        diceDiced,
+        diceNumber,
         moving,
         characters,
         selectPerson,
@@ -242,6 +258,7 @@ export const ApiContext = ({ children }: PropTypes) => {
         playerIndex,
         message,
         sendChatMessage,
+        canDice,
       }}
     >
       {children}
