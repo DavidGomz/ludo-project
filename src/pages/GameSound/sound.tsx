@@ -6,10 +6,9 @@ const GameSound = () => {
   let marioSound = new Audio(MarioSound);
   marioSound.loop = true;
   return (
-    <div className="flex">
+    <div className="flex gap-[20px] w-[200px] h-[200px] absolute top-[-40px] left-[-10px]">
       <button
-        className="w-[250px] h-[60px] bg-transparent absolute top-0 right-[20
-      px]"
+        className="bg-transparent"
         onClick={() => {
           marioSound.play();
         }}
@@ -17,8 +16,7 @@ const GameSound = () => {
         <img src={VolumeMedium} alt="audio" />
       </button>
       <button
-        className="w-[250px] h-[60px] bg-transparent absolute top-[60px] right-[10
-      px]"
+        className=" bg-transparent"
         onClick={() => {
           marioSound.pause();
         }}
