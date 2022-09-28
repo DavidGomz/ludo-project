@@ -1,6 +1,7 @@
 // Pagina para elaboração do jogo
 import PlayerName from '../Components/PlayersNames/playerName';
 import WebChat from '../Components/chat/chat';
+import GameSound from '../GameSound/sound';
 import { useApi } from '../../services/api';
 import Dice from '../Dice/dice';
 import { Board } from './board';
@@ -10,10 +11,11 @@ import { Messages } from './messages';
 export const Game = () => {
   const { room } = useApi();
   return (
-    <div className="bg-wallpaper min-h-full w-full flex justify-center items-center gap-[100px] h-screen">
+    <div className="min-h-full w-full flex justify-center items-center gap-[100px] h-screen">
       <div className="w-[40vw] max-w-[600px] min-w-[350px]">
         <div className="flex justify-between px-2">
           <div className="flex gap-1">
+            <GameSound />
             <PlayerName
               playerName={
                 room?.players[0] ? room.players[0].name : 'Aguardando'

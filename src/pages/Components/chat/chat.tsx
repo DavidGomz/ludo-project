@@ -1,11 +1,11 @@
 import { useEffect, useRef } from 'react';
 import { useApi } from '../../../services/api';
-import playerName from '../PlayersNames/playerName';
 import PlayerName from '../PlayersNames/playerName';
 
 const webChat = () => {
-  const { chat, playerIndex } = useApi();
+  const { chat, playerIndex, sendChatMessage } = useApi();
   const divOverflow = useRef<HTMLDivElement | null>(null);
+  const inputElement = useRef<HTMLInputElement | null>(null);
 
   function getColor(index?: number) {
     if (index === 0) return '#F84020';
@@ -21,7 +21,6 @@ const webChat = () => {
     const isScrolled =
       divOverflow.current.scrollTop ==
       divOverflow.current.scrollHeight - divOverflow.current.offsetHeight;
-    console.log(divOverflow.current.scrollHeight);
 
     if (!isScrolled)
       divOverflow.current.scrollTop = divOverflow.current.scrollHeight;
@@ -35,7 +34,7 @@ const webChat = () => {
       <div className="w-full h-full overflow-auto" ref={divOverflow}>
         <div className="w-full flex flex-col justify-end">
           {chat
-            ? chat.map((message) =>
+            ? chat.map((message, index) =>
                 playerIndex !== message.index ? (
                   <div className="flex flex-col p-1 text-left bg-white text-[0.7rem] font-inter text-black">
                     <PlayerName
@@ -47,6 +46,7 @@ const webChat = () => {
                       playerColor={getColor(message.index)}
                       fontSize="0.7rem"
                       width="100%"
+                      key={index}
                     />
                     <span className="w-[90%]">{message.content}</span>
                   </div>
@@ -59,6 +59,7 @@ const webChat = () => {
                           : 'Sistema'
                       }
                       playerColor={`${getColor(message.index)}`}
+                      key={index}
                       fontSize="0.7rem"
                     />
                     <span className="w-[90%]">{message.content}</span>
@@ -68,15 +69,23 @@ const webChat = () => {
             : null}
         </div>
       </div>
-      <form className="flex border-2 border-cyan-500">
+      <div className="w-full flex border-2 border-cyan-500">
         <input
           type="text"
-          className="flex flex-1 w-[100px] h-[40px] pl-1 text-lg"
+          className="flex w-full h-[40px] pl-1 text-lg"
+          ref={inputElement}
         />
-        <button className="text-base bg-cyan-500 text-white cursor-pointer hover:bg-sky-700 transition-ease p-2">
+        <button
+          className="text-base bg-cyan-500 text-white cursor-pointer hover:bg-sky-700 transition-ease p-2"
+          onClick={() => {
+            if (!sendChatMessage || inputElement.current === null) return;
+            sendChatMessage(inputElement.current.value);
+            inputElement.current.value = '';
+          }}
+        >
           Enviar
         </button>
-      </form>
+      </div>
     </div>
   );
 };

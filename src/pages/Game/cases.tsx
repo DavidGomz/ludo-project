@@ -25,7 +25,7 @@ interface PropTypes {
 }
 
 export const Cases = ({ player, playerIndex }: PropTypes) => {
-  const { playerID, room, moving, diceDiced } = useApi();
+  const { playerID, room, moving, diceNumber } = useApi();
 
   function getImage() {
     if (playerIndex === 0) return Mario;
@@ -65,7 +65,7 @@ export const Cases = ({ player, playerIndex }: PropTypes) => {
                   onClick={() => {
                     if (
                       player.id === room?.turnsPlayer.id &&
-                      diceDiced !== null &&
+                      diceNumber !== null &&
                       moving
                     ) {
                       moving(piece);

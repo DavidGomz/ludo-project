@@ -2,6 +2,7 @@ import Mario from '../../assets/images/Mario.svg';
 import Wario from '../../assets/images/wario.svg';
 import Luigi from '../../assets/images/Luigi.svg';
 import superLudo from '../../assets/images/Super Ludo.svg';
+import GameSound from '../GameSound/sound';
 import Waluigi from '../../assets/images/waluigi.svg';
 import { useState } from 'react';
 import { useApi } from '../../services/api';
@@ -18,7 +19,7 @@ export const Characters = () => {
   }
 
   return (
-    <div className="bg-[url('./src/assets/images/background.jpg')] w-screen h-screen flex flex-col justify-center items-center">
+    <div className="bg-[url('./src/assets/images/background.jpg')] w-screen h-screen bg-no-repeat  flex flex-col justify-center items-center">
       <img src={superLudo} alt="superludo" />
       <div className="w-[653px] h-[441px] flex flex-col justify-center items-center gap-8 bg-[url('./src/assets/images/charbg.jpg')] bg-no-repeat rounded-xl">
         <h1 className="text-black bg-white rounded-sm">
@@ -41,6 +42,7 @@ export const Characters = () => {
             </div>
           ))}
         </div>
+        <GameSound />
         <button
           className="w-[250px] h-[60px] rounded-r-full rounded-l-full bg-white"
           onClick={() => {
