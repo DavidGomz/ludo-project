@@ -1,21 +1,21 @@
 import { useEffect, useState } from 'react';
 
-import dice1 from '../../assets/images/dice1.svg';
-import dice2 from '../../assets/images/dice2.svg';
-import dice3 from '../../assets/images/dice3.svg';
-import dice4 from '../../assets/images/dice4.svg';
-import dice5 from '../../assets/images/dice5.svg';
-import dice6 from '../../assets/images/dice6.svg';
+import dice1 from '../assets/images/dice1.svg';
+import dice2 from '../assets/images/dice2.svg';
+import dice3 from '../assets/images/dice3.svg';
+import dice4 from '../assets/images/dice4.svg';
+import dice5 from '../assets/images/dice5.svg';
+import dice6 from '../assets/images/dice6.svg';
 
-import jogar from '../../assets/images/Jogar.svg';
+import jogar from '../assets/images/Jogar.svg';
 
-import { useApi } from '../../services/api';
+import { useApi } from '../services/api';
 
 export const imagesPath = [dice1, dice2, dice3, dice4, dice5, dice6];
 
 const Dice = () => {
   const [url, setURL] = useState(dice1);
-  const { diceNumber, dice, room, playerID, canDice } = useApi();
+  const { diceNumber, dice, room, canDice } = useApi();
   const [clicked, setClicked] = useState(!canDice);
 
   useEffect(() => {

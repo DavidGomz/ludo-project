@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
-import { useApi } from '../../../services/api';
-import PlayerName from '../PlayersNames/playerName';
+import { useApi } from '../services/api';
+import PlayerName from './playerName';
 
 const webChat = () => {
   const { chat, playerIndex, sendChatMessage } = useApi();
