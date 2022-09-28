@@ -1,13 +1,13 @@
-import { useApi } from '../../../services/api';
+import { useApi } from '../services/api';
 
-import Mario from '../../../assets/images/Mario.svg';
-import Wario from '../../../assets/images/wario.svg';
-import Luigi from '../../../assets/images/Luigi.svg';
-import Waluigi from '../../../assets/images/waluigi.svg';
+import Mario from '../assets/images/Mario.svg';
+import Wario from '../assets/images/wario.svg';
+import Luigi from '../assets/images/Luigi.svg';
+import Waluigi from '../assets/images/waluigi.svg';
 import { Background } from './background';
 
 interface Props {
-  id?: number;
+  id: number;
   color: string;
   background?: 'star' | 'left' | 'top' | 'right' | 'bottom';
 }
@@ -21,12 +21,7 @@ interface PiecesTypes {
   canEntryFinal: boolean;
 }
 
-interface DataTypes {
-  width: number;
-  height: number;
-}
-
-const squareMiddle = ({ color, id, background }: Props) => {
+const square = ({ color, id, background }: Props) => {
   const { room, playerID, moving, diceNumber } = useApi();
 
   function getFinalCase() {
@@ -61,7 +56,7 @@ const squareMiddle = ({ color, id, background }: Props) => {
     return Luigi;
   }
 
-  function getPieces() {
+  function getPiece() {
     if (!room) return null;
     const arrayPieces: PiecesTypes[] = [];
     room.players.forEach((player) => {
@@ -75,12 +70,12 @@ const squareMiddle = ({ color, id, background }: Props) => {
 
   return (
     <div
-      className={`w-[16.667%] h-[33.33%] float-left border-[#202020] border bg-[${color}]`}
+      className={`w-[33.33%] h-[16.667%] float-left border-[#202020] border bg-[${color}]`}
     >
-      <div className={`relative w-full h-full flex `}>
+      <div className="relative w-full h-full flex">
         {background ? <Background image={background} /> : null}
         {room
-          ? getPieces()?.map((piece, index, array) => {
+          ? getPiece()?.map((piece, index, array) => {
               return (
                 <img
                   key={index}
@@ -88,7 +83,7 @@ const squareMiddle = ({ color, id, background }: Props) => {
                   className={`h-full absolute`}
                   style={{
                     left: `${index * 0.3}rem`,
-                    zIndex: piece.playerID === playerID ? 2 : 0,
+                    zIndex: piece.playerID === playerID ? 2 : 1,
                     opacity:
                       piece.playerID !== playerID && array.length > 1 ? 0.7 : 1,
                     cursor: piece.playerID === playerID ? 'pointer' : 'auto',
@@ -116,4 +111,4 @@ const squareMiddle = ({ color, id, background }: Props) => {
   );
 };
 
-export default squareMiddle;
+export default square;

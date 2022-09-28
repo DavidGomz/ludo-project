@@ -2,7 +2,7 @@
 
 import superLudo from '../../assets/images/Super Ludo.svg';
 import entrar from '../../assets/images/Entrar.svg';
-import GameSound from '../GameSound/sound';
+import GameSound from '../../components/sound';
 
 import { useApi } from '../../services/api';
 import { useState } from 'react';

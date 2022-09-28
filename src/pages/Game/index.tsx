@@ -1,15 +1,16 @@
 // Pagina para elaboração do jogo
-import PlayerName from '../Components/PlayersNames/playerName';
-import WebChat from '../Components/chat/chat';
-import GameSound from '../GameSound/sound';
+import PlayerName from '../../components/playerName';
+import WebChat from '../../components/chat';
+import GameSound from '../../components/sound';
 import { useApi } from '../../services/api';
-import Dice from '../Dice/dice';
+import Dice from '../../components/dice';
 import { Board } from './board';
 import { ArrowFatLinesLeft, ArrowFatLinesRight } from 'phosphor-react';
 import { Messages } from './messages';
 
 export const Game = () => {
   const { room } = useApi();
+
   return (
     <div className="min-h-full w-full flex justify-center items-center gap-[100px] h-screen">
       <div className="w-[40vw] max-w-[600px] min-w-[350px]">

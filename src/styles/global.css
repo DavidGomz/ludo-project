@@ -5,13 +5,13 @@
 
 body {
   font-family: 'Press Start 2P';
-  background-image:"url('./src/assets/images/background.jpg')";
+  background-image: "url('./src/assets/images/background.jpg')";
   background-repeat: no-repeat;
 }
 
 @font-face {
   font-family: 'Press Start 2P';
-  src: url('/src/font/PressStart2P-Regular.ttf');
+  src: url('/src/assets/font/PressStart2P-Regular.ttf');
 }
 
 * {

@@ -1,5 +1,5 @@
-import Square from '../Components/squares/square';
-import SquareMiddle from '../Components/squares/square-middle';
+import Square from '../../components/square';
+import SquareMiddle from '../../components/square-middle';
 import { useApi } from '../../services/api';
 import { Cases } from './cases';
 import { FinishedPieces } from './finishedPieces';

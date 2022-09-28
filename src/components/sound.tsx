@@ -1,6 +1,6 @@
-import MarioSound from '../../sound/supermario.wav';
-import VolumeMedium from '../../assets/images/volume-medium.svg';
-import MuteVolume from '../../assets/images/volume-mute.svg';
+import MarioSound from '../assets/sound/supermario.wav';
+import VolumeMedium from '../assets/images/volume-medium.svg';
+import MuteVolume from '../assets/images/volume-mute.svg';
 
 const GameSound = () => {
   let marioSound = new Audio(MarioSound);
@@ -11,6 +11,7 @@ const GameSound = () => {
         className="bg-transparent"
         onClick={() => {
           marioSound.play();
+          marioSound.volume = 0.2;
         }}
       >
         <img src={VolumeMedium} alt="audio" />
