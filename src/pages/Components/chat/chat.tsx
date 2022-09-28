@@ -59,6 +59,7 @@ const webChat = () => {
                           : 'Sistema'
                       }
                       playerColor={`${getColor(message.index)}`}
+                      key={index}
                       fontSize="0.7rem"
                     />
                     <span className="w-[90%]">{message.content}</span>
